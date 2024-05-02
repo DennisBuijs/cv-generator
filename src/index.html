@@ -28,7 +28,7 @@
             </div>
             <div class="editor">
                 <h1>Resumade</h1>
-                <form id="editor-form" oninput="onFormChange(event)">
+                <form id="editor-form" oninput="onFormInput()">
                     <section>
                         <h2>Your details</h2>
                         <div class="form-row row two-cols">
@@ -101,7 +101,7 @@
         </div>
 
         <script>
-            function onFormChange(e) {
+            function onFormInput() {
                 const formEl = document.getElementById("editor-form");
                 const vars = [];
 
@@ -110,9 +110,8 @@
                 });
 
                 const previewEl = document.getElementById("preview");
-                const fields = [...previewEl.querySelectorAll(".field")];
 
-                fields.forEach((field) => {
+                [...previewEl.querySelectorAll(".field")].forEach((field) => {
                     const id = field.getAttribute("data-id");
                     field.innerHTML = vars[id];
                 });
