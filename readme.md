@@ -11,3 +11,4 @@ Generate beautiful CVs with a simple form.
 - Download your CV as a PDF file
 - Host your CV as a shareable webpage
 - Autofill the CV from your LinkedIn profile
+- Themes and styling options
