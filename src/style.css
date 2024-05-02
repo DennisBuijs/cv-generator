@@ -3,7 +3,7 @@
 }
 
 html {
-    --theme-color: salmon;
+    --theme-color: #635050;
 }
 
 body {
@@ -18,7 +18,7 @@ body {
 }
 
 .preview {
-    background: var(--theme-color);
+    background-image: linear-gradient(to right bottom, #777777, #706d71, #6b6368, #67595d, #635050);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,10 +28,16 @@ body {
     aspect-ratio: 1/1.41;
     background: white;
     width: 80%;
+    padding: 1in;
+    box-shadow:
+        rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+        rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
 .editor {
     padding: 32px;
+    color: rgb(66, 84, 102);
+    overflow-y: auto;
 }
 
 .form-row {
@@ -66,4 +72,17 @@ section {
     padding-bottom: 16px;
     margin-bottom: 16px;
     border-bottom: 1px solid var(--theme-color);
+}
+
+.field {
+    white-space: pre-wrap;
+}
+
+.space {
+    height: 32px;
+}
+
+.field:empty {
+    display: inline-block;
+    height: 1lh;
 }

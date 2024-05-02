@@ -14,12 +14,23 @@
                     <span class="field" data-id="firstName"></span>
                     <span class="field" data-id="lastName"></span>
                     <div class="field" data-id="email"></div>
+                    <div class="field" data-id="address"></div>
+                    <div class="space"></div>
+                    <h2>Work experience</h2>
+                    <div class="field" data-id="company"></div>
+                    <div class="field" data-id="function"></div>
+                    <div class="field" data-id="workDescription"></div>
+                    <div class="space"></div>
+                    <h2>Education</h2>
+                    <div class="field" data-id="school"></div>
+                    <div class="field" data-id="educationDescription"></div>
                 </div>
             </div>
             <div class="editor">
-                <h1>CV Generator</h1>
-                <form id="editor-form" onchange="onFormChange(event)">
+                <h1></h1>
+                <form id="editor-form" oninput="onFormChange(event)">
                     <section>
+                        <h2>Your details</h2>
                         <div class="form-row row two-cols">
                             <label for="first-name">
                                 <span class="label">First name</span>
@@ -43,6 +54,45 @@
                             <label for="address">
                                 <span class="label">Address</span>
                                 <textarea name="address" id="address" rows="3"></textarea>
+                            </label>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>Work experience</h2>
+                        <div class="form-row row two-cols">
+                            <label for="company">
+                                <span class="label">Company</span>
+                                <input type="text" id="company" name="company" />
+                            </label>
+
+                            <label for="function">
+                                <span class="label">Function</span>
+                                <input type="text" id="function" name="function" />
+                            </label>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="work-description">
+                                <span class="label">Description</span>
+                                <textarea name="workDescription" id="work-description" rows="5"></textarea>
+                            </label>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h2>Education</h2>
+                        <div class="form-row row two-cols">
+                            <label for="school">
+                                <span class="label">School</span>
+                                <input type="text" id="school" name="school" />
+                            </label>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="education-description">
+                                <span class="label">Description</span>
+                                <textarea name="educationDescription" id="education-description" rows="5"></textarea>
                             </label>
                         </div>
                     </section>
