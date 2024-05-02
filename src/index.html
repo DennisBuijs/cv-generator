@@ -9,39 +9,64 @@
     </head>
     <body>
         <div class="layout">
-            <div class="preview">
-                <div class="paper"></div>
+            <div class="preview" id="preview">
+                <div class="paper">
+                    <span class="field" data-id="firstName"></span>
+                    <span class="field" data-id="lastName"></span>
+                    <div class="field" data-id="email"></div>
+                </div>
             </div>
             <div class="editor">
                 <h1>CV Generator</h1>
-                <section>
-                    <div class="form-row row two-cols">
-                        <label for="first-name">
-                            <span class="label">First name</span>
-                            <input type="text" id="first-name" name="first-name" />
-                        </label>
+                <form id="editor-form" onchange="onFormChange(event)">
+                    <section>
+                        <div class="form-row row two-cols">
+                            <label for="first-name">
+                                <span class="label">First name</span>
+                                <input type="text" id="first-name" name="firstName" />
+                            </label>
 
-                        <label for="last-name">
-                            <span class="label">Last name</span>
-                            <input type="text" id="last-name" name="last-name" />
-                        </label>
-                    </div>
+                            <label for="last-name">
+                                <span class="label">Last name</span>
+                                <input type="text" id="last-name" name="lastName" />
+                            </label>
+                        </div>
 
-                    <div class="form-row">
-                        <label for="email">
-                            <span class="label">E-mail</span>
-                            <input type="text" id="email" name="email" />
-                        </label>
-                    </div>
+                        <div class="form-row">
+                            <label for="email">
+                                <span class="label">E-mail</span>
+                                <input type="text" id="email" name="email" />
+                            </label>
+                        </div>
 
-                    <div class="form-row">
-                        <label for="address">
-                            <span class="label">Address</span>
-                            <textarea name="address" id="address" rows="3"></textarea>
-                        </label>
-                    </div>
-                </section>
+                        <div class="form-row">
+                            <label for="address">
+                                <span class="label">Address</span>
+                                <textarea name="address" id="address" rows="3"></textarea>
+                            </label>
+                        </div>
+                    </section>
+                </form>
             </div>
         </div>
+
+        <script>
+            function onFormChange(e) {
+                const formEl = document.getElementById("editor-form");
+                const vars = [];
+
+                [...formEl.querySelectorAll("input, textarea")].forEach((el) => {
+                    vars[el.getAttribute("name")] = el.value;
+                });
+
+                const previewEl = document.getElementById("preview");
+                const fields = [...previewEl.querySelectorAll(".field")];
+
+                fields.forEach((field) => {
+                    const id = field.getAttribute("data-id");
+                    field.innerHTML = vars[id];
+                });
+            }
+        </script>
     </body>
 </html>
