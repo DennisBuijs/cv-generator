@@ -1,0 +1,59 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+}
+
+.preview {
+    background: salmon;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paper {
+    aspect-ratio: 1/1.41;
+    background: white;
+    width: 80%;
+}
+
+.editor {
+    padding: 32px;
+}
+
+.form-row {
+    margin-bottom: 16px;
+}
+
+textarea,
+input {
+    font: inherit;
+    letter-spacing: inherit;
+    word-spacing: inherit;
+    display: block;
+    width: 100%;
+}
+
+textarea {
+    resize: none;
+}
+
+.row.two-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+label .label {
+    display: block;
+    margin-bottom: 4px;
+}
