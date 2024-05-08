@@ -8,20 +8,11 @@ function addWorkExperience() {
   workExperienceAmount++;
 
   copyTemplateInto("work-experience-preview-template", "work-experience-preview", (clone) => {
-    [...clone.querySelectorAll(".field")].forEach((el) => {
-      el.setAttribute("data-id", el.getAttribute("data-id") + "-" + workExperienceAmount);
-    });
+    addIndexToPreviewFields(clone, workExperienceAmount);
   });
 
   copyTemplateInto("work-experience-editor-template", "work-experience-editor", (clone) => {
-    [...clone.querySelectorAll("input, textarea")].forEach((el) => {
-      el.setAttribute("name", el.getAttribute("name") + "-" + workExperienceAmount);
-      el.setAttribute("id", el.getAttribute("id") + "-" + workExperienceAmount);
-    });
-
-    [...clone.querySelectorAll("label")].forEach((el) => {
-      el.setAttribute("for", el.getAttribute("for") + "-" + workExperienceAmount);
-    });
+    addIndexToEditorFields(clone, workExperienceAmount);
   });
 }
 
@@ -29,20 +20,11 @@ function addEducation() {
   educationAmount++;
 
   copyTemplateInto("education-preview-template", "education-preview", (clone) => {
-    [...clone.querySelectorAll(".field")].forEach((el) => {
-      el.setAttribute("data-id", el.getAttribute("data-id") + "-" + educationAmount);
-    });
+    addIndexToPreviewFields(clone, educationAmount);
   });
 
   copyTemplateInto("education-editor-template", "education-editor", (clone) => {
-    [...clone.querySelectorAll("input, textarea")].forEach((el) => {
-      el.setAttribute("name", el.getAttribute("name") + "-" + educationAmount);
-      el.setAttribute("id", el.getAttribute("id") + "-" + educationAmount);
-    });
-
-    [...clone.querySelectorAll("label")].forEach((el) => {
-      el.setAttribute("for", el.getAttribute("for") + "-" + educationAmount);
-    });
+    addIndexToEditorFields(clone, educationAmount);
   });
 }
 
@@ -66,6 +48,23 @@ function copyTemplateInto(templateId, targetId, cloneModifierFn = undefined) {
   }
 
   target.append(clone);
+}
+
+function addIndexToPreviewFields(previewElement, index) {
+  [...previewElement.querySelectorAll(".field")].forEach((el) => {
+    el.setAttribute("data-id", el.getAttribute("data-id") + "-" + index);
+  });
+}
+
+function addIndexToEditorFields(editorElement, index) {
+  [...editorElement.querySelectorAll("input, textarea")].forEach((el) => {
+    el.setAttribute("name", el.getAttribute("name") + "-" + index);
+    el.setAttribute("id", el.getAttribute("id") + "-" + index);
+  });
+
+  [...editorElement.querySelectorAll("label")].forEach((el) => {
+    el.setAttribute("for", el.getAttribute("for") + "-" + index);
+  });
 }
 
 function onFormInput() {
