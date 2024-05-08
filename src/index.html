@@ -23,9 +23,7 @@
                     <div class="field" data-id="address"></div>
                     <div class="space"></div>
                     <h2>Work experience</h2>
-                    <div class="field" data-id="company"></div>
-                    <div class="field" data-id="function"></div>
-                    <div class="field" data-id="workDescription"></div>
+                    <div id="work-experience-preview"></div>
                     <div class="space"></div>
                     <h2>Education</h2>
                     <div class="field" data-id="school"></div>
@@ -64,26 +62,9 @@
                         </div>
                     </section>
 
-                    <section>
+                    <section id="work-experience-editor">
                         <h2>Work experience</h2>
-                        <div class="form-row row two-cols">
-                            <label for="company">
-                                <span class="label">Company</span>
-                                <input type="text" id="company" name="company" />
-                            </label>
-
-                            <label for="function">
-                                <span class="label">Function</span>
-                                <input type="text" id="function" name="function" />
-                            </label>
-                        </div>
-
-                        <div class="form-row">
-                            <label for="work-description">
-                                <span class="label">Description</span>
-                                <textarea name="workDescription" id="work-description" rows="5"></textarea>
-                            </label>
-                        </div>
+                        <button type="button" onclick="addWorkExperience()">Add</button>
                     </section>
 
                     <section>
@@ -106,7 +87,97 @@
             </div>
         </div>
 
+        <template id="work-experience-preview-template">
+            <div class="field" data-id="company"></div>
+            <div class="field" data-id="function"></div>
+            <div class="field" data-id="workDescription"></div>
+        </template>
+
+        <template id="work-experience-editor-template">
+            <div class="form-row row two-cols">
+                <label for="company">
+                    <span class="label">Company</span>
+                    <input type="text" id="company" name="company" />
+                </label>
+
+                <label for="function">
+                    <span class="label">Function</span>
+                    <input type="text" id="function" name="function" />
+                </label>
+            </div>
+
+            <div class="form-row">
+                <label for="work-description">
+                    <span class="label">Description</span>
+                    <textarea name="workDescription" id="work-description" rows="5"></textarea>
+                </label>
+            </div>
+        </template>
+
         <script>
+            let workExperienceAmount = 0;
+            addWorkExperience();
+
+            function addWorkExperience() {
+                workExperienceAmount++;
+
+                addWorkExperiencePreview();
+                addWorkExperienceEditor();
+            }
+
+            function addWorkExperiencePreview() {
+                const previewTemplateId = "work-experience-preview-template";
+                const previewTemplate = document.getElementById(previewTemplateId);
+
+                if (!previewTemplate) {
+                    throw new Error(`Template '${previewTemplateId}' not found`);
+                }
+
+                const previewSectionId = "work-experience-preview";
+                const previewSection = document.getElementById(previewSectionId);
+
+                if (!previewSection) {
+                    throw new Error(`Preview section '${previewSectionId}' not found`);
+                }
+
+                const previewTemplateClone = previewTemplate.content.cloneNode(true);
+
+                [...previewTemplateClone.querySelectorAll(".field")].forEach((el) => {
+                    el.setAttribute("data-id", el.getAttribute("data-id") + "-" + workExperienceAmount);
+                });
+
+                previewSection.append(previewTemplateClone);
+            }
+
+            function addWorkExperienceEditor() {
+                const editorTemplateId = "work-experience-editor-template";
+                const editorTemplate = document.getElementById(editorTemplateId);
+
+                if (!editorTemplate) {
+                    throw new Error(`Template '${editorTemplateId}' not found`);
+                }
+
+                const editorSectionId = "work-experience-editor";
+                const editorSection = document.getElementById(editorSectionId);
+
+                if (!editorSection) {
+                    throw new Error(`Editor section '${editorSectionId}' not found`);
+                }
+
+                const editorTemplateClone = editorTemplate.content.cloneNode(true);
+
+                [...editorTemplateClone.querySelectorAll("input, textarea")].forEach((el) => {
+                    el.setAttribute("name", el.getAttribute("name") + "-" + workExperienceAmount);
+                    el.setAttribute("id", el.getAttribute("id") + "-" + workExperienceAmount);
+                });
+
+                [...editorTemplateClone.querySelectorAll("label")].forEach((el) => {
+                    el.setAttribute("for", el.getAttribute("for") + "-" + workExperienceAmount);
+                });
+
+                editorSection.append(editorTemplateClone);
+            }
+
             function onFormInput() {
                 const vars = [];
 
@@ -118,6 +189,8 @@
                     const id = field.getAttribute("data-id");
                     field.innerHTML = vars[id];
                 });
+
+                console.log(vars);
             }
         </script>
     </body>
