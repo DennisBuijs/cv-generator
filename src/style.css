@@ -3,22 +3,24 @@
 }
 
 html {
-    --theme-color: #635050;
+    --theme-color: #fa8072;
+    --text-color: #313131;
+    --cta-color: #006ecd;
 }
 
 body {
     margin: 0;
-    font-family: system-ui, sans-serif;
+    font-family: "Inter", system-ui, sans-serif;
 }
 
 .layout {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 480px;
     height: 100vh;
 }
 
 .preview {
-    background-image: linear-gradient(to right bottom, #777777, #706d71, #6b6368, #67595d, #635050);
+    background: var(--theme-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,7 +29,7 @@ body {
 .paper {
     aspect-ratio: 1/1.41;
     background: white;
-    width: 80%;
+    height: 90vh;
     padding: 1in;
     box-shadow:
         rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
@@ -36,7 +38,7 @@ body {
 
 .editor {
     padding: 32px;
-    color: rgb(66, 84, 102);
+    color: var(--text-color);
     overflow-y: auto;
 }
 
@@ -45,7 +47,8 @@ body {
 }
 
 textarea,
-input {
+input,
+button {
     font: inherit;
     letter-spacing: inherit;
     word-spacing: inherit;
@@ -71,7 +74,7 @@ label .label {
 section {
     padding-bottom: 16px;
     margin-bottom: 16px;
-    border-bottom: 1px solid var(--theme-color);
+    border-bottom: 4px solid var(--theme-color);
 }
 
 .field {
