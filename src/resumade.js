@@ -1,11 +1,37 @@
 let workExperienceAmount = 0;
+let educationAmount = 0;
+
 addWorkExperience();
+addEducation();
 
 function addWorkExperience() {
   workExperienceAmount++;
 
   addWorkExperiencePreview();
   addWorkExperienceEditor();
+}
+
+function addEducation() {
+  workExperienceAmount++;
+
+  copyTemplateInto("work-experience-editor-template", "work-experience-editor");
+}
+
+function copyTemplateInto(templateId, targetId) {
+  const template = document.getElementById(templateId);
+
+  if (!template) {
+    throw new Error(`Template '${templateId}' not found`);
+  }
+
+  const target = document.getElementById(targetId);
+
+  if (!target) {
+    throw new Error(`Target '${targetId}' not found`);
+  }
+
+  const clone = template.content.cloneNode(true);
+  target.append(clone);
 }
 
 function addWorkExperiencePreview() {
