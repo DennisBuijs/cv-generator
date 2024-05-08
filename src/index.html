@@ -26,8 +26,7 @@
                     <div id="work-experience-preview"></div>
                     <div class="space"></div>
                     <h2>Education</h2>
-                    <div class="field" data-id="school"></div>
-                    <div class="field" data-id="educationDescription"></div>
+                    <div id="education-preview"></div>
                 </div>
             </div>
             <div class="editor">
@@ -67,22 +66,9 @@
                         <button type="button" onclick="addWorkExperience()">Add</button>
                     </section>
 
-                    <section>
+                    <section id="education-editor">
                         <h2>Education</h2>
                         <button type="button" onclick="addEducation()">Add</button>
-                        <div class="form-row row two-cols">
-                            <label for="school">
-                                <span class="label">School</span>
-                                <input type="text" id="school" name="school" />
-                            </label>
-                        </div>
-
-                        <div class="form-row">
-                            <label for="education-description">
-                                <span class="label">Description</span>
-                                <textarea name="educationDescription" id="education-description" rows="5"></textarea>
-                            </label>
-                        </div>
                     </section>
                 </form>
             </div>
@@ -92,6 +78,11 @@
             <div class="field" data-id="company"></div>
             <div class="field" data-id="function"></div>
             <div class="field" data-id="workDescription"></div>
+        </template>
+
+        <template id="education-preview-template">
+            <div class="field" data-id="school"></div>
+            <div class="field" data-id="educationDescription"></div>
         </template>
 
         <template id="work-experience-editor-template">
@@ -111,6 +102,22 @@
                 <label for="work-description">
                     <span class="label">Description</span>
                     <textarea name="workDescription" id="work-description" rows="5"></textarea>
+                </label>
+            </div>
+        </template>
+
+        <template id="education-editor-template">
+            <div class="form-row row two-cols">
+                <label for="school">
+                    <span class="label">School</span>
+                    <input type="text" id="school" name="school" />
+                </label>
+            </div>
+
+            <div class="form-row">
+                <label for="education-description">
+                    <span class="label">Description</span>
+                    <textarea name="educationDescription" id="education-description" rows="5"></textarea>
                 </label>
             </div>
         </template>

@@ -7,17 +7,46 @@ addEducation();
 function addWorkExperience() {
   workExperienceAmount++;
 
-  addWorkExperiencePreview();
-  addWorkExperienceEditor();
+  copyTemplateInto("work-experience-preview-template", "work-experience-preview", (clone) => {
+    [...clone.querySelectorAll(".field")].forEach((el) => {
+      el.setAttribute("data-id", el.getAttribute("data-id") + "-" + workExperienceAmount);
+    });
+  });
+
+  copyTemplateInto("work-experience-editor-template", "work-experience-editor", (clone) => {
+    [...clone.querySelectorAll("input, textarea")].forEach((el) => {
+      el.setAttribute("name", el.getAttribute("name") + "-" + workExperienceAmount);
+      el.setAttribute("id", el.getAttribute("id") + "-" + workExperienceAmount);
+    });
+
+    [...clone.querySelectorAll("label")].forEach((el) => {
+      el.setAttribute("for", el.getAttribute("for") + "-" + workExperienceAmount);
+    });
+  });
 }
 
 function addEducation() {
-  workExperienceAmount++;
+  educationAmount++;
 
-  copyTemplateInto("work-experience-editor-template", "work-experience-editor");
+  copyTemplateInto("education-preview-template", "education-preview", (clone) => {
+    [...clone.querySelectorAll(".field")].forEach((el) => {
+      el.setAttribute("data-id", el.getAttribute("data-id") + "-" + educationAmount);
+    });
+  });
+
+  copyTemplateInto("education-editor-template", "education-editor", (clone) => {
+    [...clone.querySelectorAll("input, textarea")].forEach((el) => {
+      el.setAttribute("name", el.getAttribute("name") + "-" + educationAmount);
+      el.setAttribute("id", el.getAttribute("id") + "-" + educationAmount);
+    });
+
+    [...clone.querySelectorAll("label")].forEach((el) => {
+      el.setAttribute("for", el.getAttribute("for") + "-" + educationAmount);
+    });
+  });
 }
 
-function copyTemplateInto(templateId, targetId) {
+function copyTemplateInto(templateId, targetId, cloneModifierFn = undefined) {
   const template = document.getElementById(templateId);
 
   if (!template) {
@@ -31,60 +60,12 @@ function copyTemplateInto(templateId, targetId) {
   }
 
   const clone = template.content.cloneNode(true);
+
+  if (cloneModifierFn) {
+    cloneModifierFn(clone);
+  }
+
   target.append(clone);
-}
-
-function addWorkExperiencePreview() {
-  const previewTemplateId = "work-experience-preview-template";
-  const previewTemplate = document.getElementById(previewTemplateId);
-
-  if (!previewTemplate) {
-    throw new Error(`Template '${previewTemplateId}' not found`);
-  }
-
-  const previewSectionId = "work-experience-preview";
-  const previewSection = document.getElementById(previewSectionId);
-
-  if (!previewSection) {
-    throw new Error(`Preview section '${previewSectionId}' not found`);
-  }
-
-  const previewTemplateClone = previewTemplate.content.cloneNode(true);
-
-  [...previewTemplateClone.querySelectorAll(".field")].forEach((el) => {
-    el.setAttribute("data-id", el.getAttribute("data-id") + "-" + workExperienceAmount);
-  });
-
-  previewSection.append(previewTemplateClone);
-}
-
-function addWorkExperienceEditor() {
-  const editorTemplateId = "work-experience-editor-template";
-  const editorTemplate = document.getElementById(editorTemplateId);
-
-  if (!editorTemplate) {
-    throw new Error(`Template '${editorTemplateId}' not found`);
-  }
-
-  const editorSectionId = "work-experience-editor";
-  const editorSection = document.getElementById(editorSectionId);
-
-  if (!editorSection) {
-    throw new Error(`Editor section '${editorSectionId}' not found`);
-  }
-
-  const editorTemplateClone = editorTemplate.content.cloneNode(true);
-
-  [...editorTemplateClone.querySelectorAll("input, textarea")].forEach((el) => {
-    el.setAttribute("name", el.getAttribute("name") + "-" + workExperienceAmount);
-    el.setAttribute("id", el.getAttribute("id") + "-" + workExperienceAmount);
-  });
-
-  [...editorTemplateClone.querySelectorAll("label")].forEach((el) => {
-    el.setAttribute("for", el.getAttribute("for") + "-" + workExperienceAmount);
-  });
-
-  editorSection.append(editorTemplateClone);
 }
 
 function onFormInput() {
