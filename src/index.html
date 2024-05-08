@@ -102,16 +102,13 @@
 
         <script>
             function onFormInput() {
-                const formEl = document.getElementById("editor-form");
                 const vars = [];
 
-                [...formEl.querySelectorAll("input, textarea")].forEach((el) => {
+                [...document.querySelectorAll("#editor-form input, #editor-form textarea")].forEach((el) => {
                     vars[el.getAttribute("name")] = el.value;
                 });
 
-                const previewEl = document.getElementById("preview");
-
-                [...previewEl.querySelectorAll(".field")].forEach((field) => {
+                [...document.querySelectorAll("#preview .field")].forEach((field) => {
                     const id = field.getAttribute("data-id");
                     field.innerHTML = vars[id];
                 });
